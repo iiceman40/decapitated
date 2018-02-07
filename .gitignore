@@ -1,0 +1,5 @@
+.idea
+/client/node_modules/
+/api/config/
+/api/classes/composer.lock
+/api/classes/vendor/

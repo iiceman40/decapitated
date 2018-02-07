@@ -1,0 +1,47 @@
+<h1>Install</h1>
+
+<form>
+	<ng-container *ngFor="let field of config">
+
+		<ng-container *ngIf="isArray(field.val) === false">
+			<mat-card>
+				<mat-card-title>{{field.key}}</mat-card-title>
+				<div>
+					<mat-form-field>
+						<input matInput
+						       value="{{field.val}}"
+						       placeholder="{{field.key}}"
+						       [(ngModel)]="field.val"
+						       name="{{field.key}}"
+						/>
+					</mat-form-field>
+				</div>
+			</mat-card>
+		</ng-container>
+
+		<ng-container *ngIf="isArray(field.val) === true">
+			<mat-card>
+				<mat-card-title>{{field.key}}</mat-card-title>
+				<ng-container *ngFor="let nestedField of field.val">
+					<div>
+						<mat-form-field>
+							<input matInput
+							       value="{{nestedField.val}}"
+							       placeholder="{{nestedField.key}}"
+							       [(ngModel)]="nestedField.val"
+							       name="{{field.key * '_' + nestedField.key}}"
+							/>
+						</mat-form-field>
+					</div>
+				</ng-container>
+			</mat-card>
+		</ng-container>
+
+	</ng-container>
+
+	<button mat-raised-button color="primary" (click)="submit()">Submit</button>
+</form>
+
+<pre>
+{{config | json}}
+</pre>
